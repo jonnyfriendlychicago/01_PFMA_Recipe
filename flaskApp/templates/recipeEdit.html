@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Recipe</title>
+</head>
+<body>
+    <header>
+        <h1>Does this recipe need fixing?  Well, do it!</h1>
+        <h2>We trust you, {{dsp_get_oneUser.firstName}}.  You got this.</h2>
+    </header>
+    <div class="messages">
+        {% with messages = get_flashed_messages() %}
+            {%if messages %}
+                {% for m in messages %}
+                    <h5>{{m}}</h5>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <main>
+        <form action="/recipe/{{dsp_get_oneRecipe.id}}/update/" method="post" > 
+            <section>
+                <label for="recipeName"> Recipe Name: </label>
+                <input type="text" name="recipeName" value="{{dsp_get_oneRecipe.recipeName}}">
+            </section>
+            
+            <section> 
+                <label for="recipeDesc">Description:</label>
+                <textarea name="recipeDesc" rows="10" cols="30">{{dsp_get_oneRecipe.recipeDesc}}</textarea>
+            </section>
+            
+            <section> 
+                <label for="recipeInst">Description:</label>
+                <textarea name="recipeInst" rows="10" cols="30">{{dsp_get_oneRecipe.recipeInst}}</textarea>
+            </section>
+            
+            <button>Update Recipe</button>
+        </form>
+    </main>
+</body>
+</html>

@@ -19,7 +19,7 @@ def addRecipe():
         "user_id": session['user_id']
     }
     return render_template(
-        'addRecipe.html' , 
+        'recipeAdd.html' , 
         dsp_get_oneUser = user_mod.User_cls.get_oneUser(data) 
     )
 
@@ -45,7 +45,7 @@ def viewRecipe(recipe_id):
         , 'recipe_id': recipe_id
     }
     return render_template(
-        'viewRecipe.html'
+        'recipeView.html'
         , dsp_get_oneUser = user_mod.User_cls.get_oneUser(data) 
         , dsp_get_oneRecipe = recipe_mod.Recipe_cls.get_oneRecipe(data)   
     )
@@ -64,7 +64,7 @@ def editRecipe(recipe_id):
         
     }
     return render_template(
-        'editRecipe.html' 
+        'recipeEdit.html' 
         , dsp_get_oneUser = user_mod.User_cls.get_oneUser(data)
         , dsp_get_oneRecipe = recipe_mod.Recipe_cls.get_oneRecipe(data)
     )

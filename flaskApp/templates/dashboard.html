@@ -10,12 +10,7 @@
 <body>
     <header>
         <h1>Recipes Dashboard<br>Welcome {{dsp_get_oneUser.fullName()}}</h1>
-        <nav>
-            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
-        </nav>
     </header>
-    
-    <!-- is is a good habit to just have below on every page in a web app like this?  instructor answer: YES!!!!!!!!!!!-->
     <div class="messages">
         {% with messages = get_flashed_messages() %}
             {%if messages %}
