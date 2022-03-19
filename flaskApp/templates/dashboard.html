@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Recipes Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Recipes Dashboard<br>Welcome {{dsp_get_oneUser.fullName()}}</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    
+    <!-- is is a good habit to just have below on every page in a web app like this?  instructor answer: YES!!!!!!!!!!!-->
+    <div class="messages">
+        {% with messages = get_flashed_messages() %}
+            {%if messages %}
+                {% for m in messages %}
+                    <h5>{{m}}</h5>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <main>
+        <table>
+            <tr>
+                <th>Recipe Name</th>
+                <th>Under 30 mins?</th>
+                <th>Instructions</th>
+                <th>Actions</th>
+            </tr>
+            {% for rec in dsp_get_allRecipe %}
+                <tr>
+                    <td>{{rec.recipeName}}</td>
+                    <td>{{rec.under30min}}</td>
+                    <td>{{rec.recipeInst}}</td>
+                    <td class="studentTblData"><a href="/recipe/{{rec.id}}/">View</a>
+                </tr>
+            {% endfor %}
+        </table>
+        <button> <a href="/recipe/add/">Add Recipe</a></button>
+        <button> <a href="/logout/">Logout</a></button>
+    </main>
+    
+
+    
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>
