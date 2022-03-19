@@ -30,6 +30,8 @@ def createRecipe():
         , 'recipeName': request.form['recipeName']
         , 'recipeDesc': request.form['recipeDesc']
         , 'recipeInst': request.form['recipeInst']
+        , 'under30min': request.form['under30min']
+        , 'dateMade': request.form['dateMade']
     }
     recipe_mod.Recipe_cls.saveRecipe(data)
     return redirect('/dashboard/')
@@ -95,7 +97,10 @@ def updateRecipe(recipe_id):
         , 'recipeName': request.form['recipeName']
         , 'recipeDesc': request.form['recipeDesc']
         , 'recipeInst': request.form['recipeInst']
+        , 'under30min': request.form['under30min']
+        # , 'recipeInst': request.form['recipeInst']
     }
+    print(request.form['recipeDesc'])
     updateRecipe = recipe_mod.Recipe_cls.updateRecipe(data)
     return redirect(f'/recipe/{recipe_id}/')
 

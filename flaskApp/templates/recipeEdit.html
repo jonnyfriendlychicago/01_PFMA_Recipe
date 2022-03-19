@@ -33,10 +33,36 @@
             </section>
             
             <section> 
-                <label for="recipeInst">Description:</label>
+                <label for="recipeInst">Instructions:</label>
                 <textarea name="recipeInst" rows="10" cols="30">{{dsp_get_oneRecipe.recipeInst}}</textarea>
             </section>
             
+            <section> 
+                <p>Under 30 mins? </p>
+                {% if dsp_get_oneRecipe.under30min == "yes" %}
+                    <input type="radio" id="yes" name="under30min" value="yes" checked>
+                    <label for="yes">Yes</label><br>
+                    <input type="radio" id="no" name="under30min" value="no">
+                    <label for="no">No</label><br>
+                {% elif dsp_get_oneRecipe.under30min == "no" %}
+                    <input type="radio" id="yes" name="under30min" value="yes" >
+                    <label for="yes">Yes</label><br>
+                    <input type="radio" id="no" name="under30min" value="no" checked>
+                    <label for="no">No</label><br>
+                {% else %} 
+                    <input type="radio" id="yes" name="under30min" value="yes" >
+                    <label for="yes">Yes</label><br>
+                    <input type="radio" id="no" name="under30min" value="no" >
+                    <label for="no">No</label><br>
+                {% endif %}
+            </section>
+
+            <section> 
+                <label for="dateMade">dateMade:</label>
+                <input type="date" id="dateMade" name="dateMade" value = "{{dsp_get_oneRecipe.dateMade.strftime('%Y-%m-%d')}}">
+            </section>
+
+
             <button>Update Recipe</button>
         </form>
         <button> <a href="/dashboard/">Cancel Edit</a></button>

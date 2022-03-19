@@ -1,3 +1,7 @@
+.multiLine {
+    white-space: pre-line; 
+}
+
 .flexrow {
     display: flex;
     flex-direction: row;

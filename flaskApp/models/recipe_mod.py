@@ -25,7 +25,7 @@ class Recipe_cls:
 
     @classmethod
     def saveRecipe(cls, data):
-        q = 'insert into recipe (recipeName, recipeDesc, recipeInst, user_id, createdAt, updatedAt) values ( %(recipeName)s, %(recipeDesc)s, %(recipeInst)s, %(user_id)s, NOW(), NOW() );'
+        q = 'insert into recipe (recipeName, recipeDesc, recipeInst, under30min, user_id, dateMade, createdAt, updatedAt) values ( %(recipeName)s, %(recipeDesc)s, %(recipeInst)s, %(under30min)s , %(user_id)s, %(dateMade)s, NOW(), NOW() );'
         return connectToMySQL(cls.db).query_db(q, data)
 
     @classmethod
@@ -38,7 +38,7 @@ class Recipe_cls:
 
     @classmethod
     def updateRecipe (cls, data):
-        q = 'update recipe set recipeName = %(recipeName)s, recipeDesc = %(recipeDesc)s, recipeInst = %(recipeInst)s, updatedAt = NOW() where id = %(recipe_id)s;'
+        q = 'update recipe set recipeName = %(recipeName)s, recipeDesc = %(recipeDesc)s, recipeInst = %(recipeInst)s, under30min = %(under30min)s, updatedAt = NOW() where id = %(recipe_id)s;'
         return connectToMySQL(cls.db).query_db(q, data)
 
     @classmethod
