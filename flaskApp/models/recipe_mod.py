@@ -40,17 +40,19 @@ class Recipe_cls:
     def updateRecipe (cls, data):
         q = 'update recipe set recipeName = %(recipeName)s, recipeDesc = %(recipeDesc)s, recipeInst = %(recipeInst)s, updatedAt = NOW() where id = %(recipe_id)s;'
         return connectToMySQL(cls.db).query_db(q, data)
-        
+
+    @classmethod
+    def deleteRecipe (cls, data):
+        q = 'delete from recipe where id = %(recipe_id)s;'
+        return connectToMySQL(cls.db).query_db(q, data)
+
 """
 
 
 
 
 
-    @classmethod
-    def deleteAirline (cls, data):
-        q = 'delete from airline where id = %(id)s;'
-        return connectToMySQL(cls.db).query_db(q, data)
+    
 
     @classmethod
     def get_oneAirlineAllFlight(cls, data):

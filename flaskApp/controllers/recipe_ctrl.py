@@ -81,6 +81,18 @@ def updateRecipe(recipe_id):
     updateRecipe = recipe_mod.Recipe_cls.updateRecipe(data)
     return redirect(f'/recipe/{recipe_id}/')
 
+@app.route('/recipe/<int:recipe_id>/delete/')
+def deleteRecipe(recipe_id): 
+    data = {
+        'recipe_id': recipe_id
+    }
+    recipe_mod.Recipe_cls.deleteRecipe(data)
+    # Airline_cls.deleteAirline(data)
+    # I want to add a flash here that indicates airline was deleted.  Help? 
+    flash("Recipe deleted.  POOF!  GONE!")
+    return redirect ('/dashboard/')
+
+
 """
 @app.route('/airlines/')
 def airlineHome():
@@ -125,14 +137,6 @@ def airlineHome():
 
 
 
-@app.route('/airlines/<int:airline_id>/delete')
-def deleteAirline(airline_id): 
-    data = {
-        'id': airline_id
-    }
-    Airline_cls.deleteAirline(data)
-    # I want to add a flash here that indicates airline was deleted.  Help? 
-    return redirect ('/airlines/')
 
 
 """

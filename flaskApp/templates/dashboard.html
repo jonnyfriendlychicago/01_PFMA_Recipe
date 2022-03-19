@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h1>Recipes Dashboard<br>Welcome {{dsp_get_oneUser.fullName()}}</h1>
+        <h1>Recipes Dashboard<br>Welcome {{dsp_get_oneUser.fullName()}}, aka userid = {{dsp_get_oneUser.id}} </h1>
     </header>
     <div class="messages">
         {% with messages = get_flashed_messages() %}
@@ -25,6 +25,7 @@
         <table>
             <tr>
                 <th>Recipe Name</th>
+                <th>Recipe.user_id aka creator</th>
                 <th>Under 30 mins?</th>
                 <th>Instructions</th>
                 <th>Actions</th>
@@ -32,9 +33,16 @@
             {% for rec in dsp_get_allRecipe %}
                 <tr>
                     <td>{{rec.recipeName}}</td>
+                    <td>{{rec.user_id}} </td>
                     <td>{{rec.under30min}}</td>
                     <td>{{rec.recipeInst}}</td>
-                    <td class="studentTblData"><a href="/recipe/{{rec.id}}/">View</a>
+                    <td class="studentTblData">
+                        <a href="/recipe/{{rec.id}}/">View</a>
+                        {%if dsp_get_oneUser.id ==  rec.user_id %}
+                            <a href="/recipe/{{rec.id}}/edit/">Edit</a>
+                            <a href="/recipe/{{rec.id}}/delete/">Delete</a>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </table>
