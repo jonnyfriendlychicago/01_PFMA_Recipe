@@ -50,23 +50,41 @@ def viewRecipe(recipe_id):
         , dsp_get_oneRecipe = recipe_mod.Recipe_cls.get_oneRecipe(data)   
     )
 
+# @app.route('/recipe/<int:recipe_id>/edit/')
+# def editRecipe(recipe_id): 
+#     if 'user_id' not in session: 
+#         flash("You must be logged in to access this site.")
+#         return redirect('/')
+#     data = {
+#         'user_id': session['user_id']
+#         , 'recipe_id': recipe_id
+        
+#     }
+#     return render_template(
+#         'recipeEdit.html' 
+#         , dsp_get_oneUser = user_mod.User_cls.get_oneUser(data)
+#         , dsp_get_oneRecipe = recipe_mod.Recipe_cls.get_oneRecipe(data)
+#     )
+
 @app.route('/recipe/<int:recipe_id>/edit/')
 def editRecipe(recipe_id): 
     if 'user_id' not in session: 
         flash("You must be logged in to access this site.")
         return redirect('/')
-    userData = {
-        
-    }
     data = {
         'user_id': session['user_id']
         , 'recipe_id': recipe_id
         
     }
-    return render_template(
+    get_oneRecipe = recipe_mod.Recipe_cls.get_oneRecipe(data)
+    if session['user_id'] != get_oneRecipe.user_id:
+        flash("You must be the creator of a recipe to edit the recipe.")
+        return redirect('/')
+    else: 
+        return render_template(
         'recipeEdit.html' 
         , dsp_get_oneUser = user_mod.User_cls.get_oneUser(data)
-        , dsp_get_oneRecipe = recipe_mod.Recipe_cls.get_oneRecipe(data)
+        , dsp_get_oneRecipe = get_oneRecipe
     )
 
 @app.route('/recipe/<int:recipe_id>/update/', methods=['POST'])
@@ -83,14 +101,21 @@ def updateRecipe(recipe_id):
 
 @app.route('/recipe/<int:recipe_id>/delete/')
 def deleteRecipe(recipe_id): 
+    if 'user_id' not in session: 
+        flash("You must be logged in to access this site.")
+        return redirect('/')
     data = {
-        'recipe_id': recipe_id
+        'user_id': session['user_id']
+        , 'recipe_id': recipe_id
     }
-    recipe_mod.Recipe_cls.deleteRecipe(data)
-    # Airline_cls.deleteAirline(data)
-    # I want to add a flash here that indicates airline was deleted.  Help? 
-    flash("Recipe deleted.  POOF!  GONE!")
-    return redirect ('/dashboard/')
+    get_oneRecipe = recipe_mod.Recipe_cls.get_oneRecipe(data)
+    if session['user_id'] != get_oneRecipe.user_id:
+        flash("You must be the creator of a recipe to delete it.")
+        return redirect('/dashboard/')
+    else: 
+        recipe_mod.Recipe_cls.deleteRecipe(data)
+        flash("Recipe deleted.  POOF!  GONE!")
+        return redirect ('/dashboard/')
 
 
 """

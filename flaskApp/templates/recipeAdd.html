@@ -10,9 +10,6 @@
     <header>
         <h1>Give us your best game!</h1>
         <h2>Add a recipe, {{dsp_get_oneUser.firstName}}</h2>
-        <nav>
-            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
-        </nav>
     </header>
     <div class="messages">
         {% with messages = get_flashed_messages() %}
@@ -42,6 +39,8 @@
             
             <button>Add Recipe</button>
         </form>
+        <button> <a href="/dashboard/">Cancel New Recipe</a></button>
+        <button> <a href="/logout/">Logout</a></button>
     </main>
 </body>
 </html>

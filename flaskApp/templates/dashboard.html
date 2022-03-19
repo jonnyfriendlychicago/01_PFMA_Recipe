@@ -24,17 +24,21 @@
     <main>
         <table>
             <tr>
+                <th>Recipe ID</th>
                 <th>Recipe Name</th>
                 <th>Recipe.user_id aka creator</th>
                 <th>Under 30 mins?</th>
+                <th>Description</th>
                 <th>Instructions</th>
                 <th>Actions</th>
             </tr>
             {% for rec in dsp_get_allRecipe %}
                 <tr>
+                    <td>{{rec.id}}</td>
                     <td>{{rec.recipeName}}</td>
                     <td>{{rec.user_id}} </td>
                     <td>{{rec.under30min}}</td>
+                    <td>{{rec.recipeDesc}}</td>
                     <td>{{rec.recipeInst}}</td>
                     <td class="studentTblData">
                         <a href="/recipe/{{rec.id}}/">View</a>
