@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Add a Recipe</title>
+</head>
+<body>
+    <header>
+        <h1>Give us your best game!</h1>
+        <h2>Add a recipe, {{dsp_get_oneUser.firstName}}</h2>
+    </header>
+    <div class="messages">
+        {% with messages = get_flashed_messages() %}
+            {%if messages %}
+                {% for m in messages %}
+                    <h5>{{m}}</h5>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <main>
+        <form action="/recipe/create/" method="post" > 
+            <section>
+                <label for="recipeName"> Recipe Name: </label>
+                <input type="text" name="recipeName">
+            </section>
+            
+            <section> 
+                <label for="recipeDesc">Description:</label>
+                <textarea name="recipeDesc" rows="10" cols="30"></textarea>
+            </section>
+            
+            <section> 
+                <label for="recipeInst">Instructions:</label>
+                <textarea name="recipeInst" rows="10" cols="30"></textarea>
+            </section>
+            
+            <section> 
+                <p>Under 30 mins? </p>
+                <input type="radio" id="yes" name="under30min" value="yes">
+                <label for="yes">Yes</label><br>
+                
+                <input type="radio" id="no" name="under30min" value="no">
+                <label for="no">No</label><br>
+            </section>
+
+            <section> 
+                <label for="dateMade">dateMade:</label>
+                <input type="date" id="dateMade" name="dateMade">
+            </section>
+
+            <button>Add Recipe</button>
+        </form>
+        <button> <a href="/dashboard/">Cancel New Recipe</a></button>
+        <button> <a href="/logout/">Logout</a></button>
+    </main>
+</body>
+</html>

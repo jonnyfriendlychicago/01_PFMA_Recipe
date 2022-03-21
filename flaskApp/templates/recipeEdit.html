@@ -5,13 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <title>Add a Recipe</title>
+    <title>Edit Recipe</title>
 </head>
 <body>
     <header>
-        <div class="header_content_vert"> 
-            <h1>Does this recipe need fixing?  Well... do it!</h1>
-            <h2>We trust you, {{dsp_get_oneUser.firstName}}.  You got this.</h2>
+        <div class="header_content"> 
+            <div class="header_content_vert_left"> 
+                <h1>Recipes</h1>
+                <h2>Your guide to kitchen sanity. </h2>
+            </div>
+            <div class="header_content_vert_right"> 
+                <h2>Welcome, {{dsp_get_oneUser.firstName}}</h2>
+                <h4>(UserID: {{dsp_get_oneUser.id}})</h4>
+                <a href="/logout/">Logout</a>
+            </div>
         </div>
     </header>
 
@@ -25,57 +32,75 @@
         {% endwith %}
     </div>
     <main>
-        <form action="/recipe/{{dsp_get_oneRecipe.id}}/update/" method="post" > 
-            <section>
-                <label for="recipeName"> Recipe Name: </label>
-                <input type="text" name="recipeName" value="{{dsp_get_oneRecipe.recipeName}}">
-            </section>
-            
-            <section> 
-                <label for="recipeDesc">Description:</label>
-                <textarea name="recipeDesc" rows="10" cols="30">{{dsp_get_oneRecipe.recipeDesc}}</textarea>
-            </section>
-            
-            <section> 
-                <label for="recipeInst">Instructions:</label>
-                <textarea name="recipeInst" rows="10" cols="30">{{dsp_get_oneRecipe.recipeInst}}</textarea>
-            </section>
-            
-            <section> 
-                <p>Under 30 mins? </p>
-                {% if dsp_get_oneRecipe.under30min == "yes" %}
-                    <input type="radio" id="yes" name="under30min" value="yes" checked>
-                    <label for="yes">Yes</label><br>
-                    <input type="radio" id="no" name="under30min" value="no">
-                    <label for="no">No</label><br>
-                {% elif dsp_get_oneRecipe.under30min == "no" %}
-                    <input type="radio" id="yes" name="under30min" value="yes" >
-                    <label for="yes">Yes</label><br>
-                    <input type="radio" id="no" name="under30min" value="no" checked>
-                    <label for="no">No</label><br>
-                {% else %} 
-                    <input type="radio" id="yes" name="under30min" value="yes" >
-                    <label for="yes">Yes</label><br>
-                    <input type="radio" id="no" name="under30min" value="no" >
-                    <label for="no">No</label><br>
-                {% endif %}
-            </section>
-
-            <section> 
-                {% if dsp_get_oneRecipe.dateMade %}
-                    <label for="dateMade">dateMade:</label>
-                    <input type="date" id="dateMade" name="dateMade" value = "{{dsp_get_oneRecipe.dateMade.strftime('%Y-%m-%d')}}">
-                {% else %} 
-                <label for="dateMade">dateMade:</label>
-                <input type="date" id="dateMade" name="dateMade" >
-                {% endif %}
-            </section>
-
-
-            <button>Update Recipe</button>
-        </form>
-        <button> <a href="/dashboard/">Cancel Edit</a></button>
-        <button> <a href="/logout/">Logout</a></button>
+        <div class="row_left"> 
+            <table class="table_02">
+                <form action="/recipe/{{dsp_get_oneRecipe.id}}/update/" method="post" > 
+                    <tr>
+                        <td colspan="2" class="th_02">
+                            <input type="text" name="recipeName" value="{{dsp_get_oneRecipe.recipeName}}">
+                            <label for="recipeName">(Recipe Name; Recipe id = {{dsp_get_oneRecipe.id}})</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_02_bold">
+                            <label for="recipeDesc">Description:</label>
+                        </td>
+                        <td class="td_02">
+                            <textarea name="recipeDesc" rows="10" cols="60">{{dsp_get_oneRecipe.recipeDesc}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td_02_bold">
+                            <label for="recipeInst">Instructions:</label>
+                        </td>
+                        <td class="td_02">
+                            <textarea name="recipeInst" rows="10" cols="60">{{dsp_get_oneRecipe.recipeInst}}</textarea>
+                        </td>
+                    </tr>    
+                    <tr>
+                        <td class="td_02_bold">
+                            <p>Under 30 mins? </p>
+                        </td>
+                        <td class="td_02">
+                            {% if dsp_get_oneRecipe.under30min == "yes" %}
+                                <input type="radio" id="yes" name="under30min" value="yes" checked>
+                                <label for="yes">Yes</label><br>
+                                <input type="radio" id="no" name="under30min" value="no">
+                                <label for="no">No</label><br>
+                            {% elif dsp_get_oneRecipe.under30min == "no" %}
+                                <input type="radio" id="yes" name="under30min" value="yes" >
+                                <label for="yes">Yes</label><br>
+                                <input type="radio" id="no" name="under30min" value="no" checked>
+                                <label for="no">No</label><br>
+                            {% else %} 
+                                <input type="radio" id="yes" name="under30min" value="yes" >
+                                <label for="yes">Yes</label><br>
+                                <input type="radio" id="no" name="under30min" value="no" >
+                                <label for="no">No</label><br>
+                            {% endif %}
+                        </td>
+                    </tr>    
+                    <tr>
+                        <td class="td_02_bold">
+                            <label for="dateMade">Date Made:</label>
+                        </td>
+                        <td class="td_02">
+                            {% if dsp_get_oneRecipe.dateMade %}
+                                <input type="date" id="dateMade" name="dateMade" value = "{{dsp_get_oneRecipe.dateMade.strftime('%Y-%m-%d')}}">
+                            {% else %} 
+                                <input type="date" id="dateMade" name="dateMade" >
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="td_02">
+                            <button>Update Recipe</button>
+                        </td>
+                    </tr>
+                </form>
+            </table>
+            <button> <a href="/recipe/{{dsp_get_oneRecipe.id}}/">Cancel Edit</a></button>
+        </div>
     </main>
 </body>
 </html>

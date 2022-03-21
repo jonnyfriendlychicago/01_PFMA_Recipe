@@ -2,29 +2,81 @@
     margin: 0; 
     padding: 0; 
 }
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* margin-top: 3px; */
+    /* border: 1px solid red;  */
+}
 header {
     width: 100%; 
     display: flex; 
-    justify-content: center;
+    justify-content: center; 
     background-color: aquamarine;
     height: 100px; 
     align-items: center;
 }
 
-.header_content_vert {
+.header_content {
     display: flex; 
-    flex-direction: column; 
+    justify-content: space-between;
     align-items: center;
+    width: 85%; 
+}
+
+.header_content_vert_left {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.header_content_vert_right {
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end; 
 }
 
 main {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    /* align-items: center; */
     margin-top: 3px;
-    border: 1px solid red; 
+    /* border: 1px solid red;  */
+    width: 85%; 
+    /* padding-left: 10%; */
+    /* padding-right: 10%; */
 }
+
+.row_left {
+    width: 100%;
+    padding-left: 50px; 
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.row_flex_left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.container_01 {
+    width: 300px; 
+    border: 5px solid darkgray; 
+    border-radius: 5px;
+    margin-left: 10px; 
+    margin-right: 10px;
+}
+
+.container_02 {
+    width: 600px; 
+    border: 5px solid darkgray; 
+    border-radius: 5px;
+}
+
+
 
 .table_01, .td_01, .th_01 {
     border: 1px solid black; 
@@ -33,11 +85,41 @@ main {
 
 .td_01, .th_01 {
     padding: 5px; 
+    vertical-align:top; 
+    /* vertical-align: text-top; */
 }
 
 .th_01 {
     background-color:  rgb(148, 146, 146);
 }
+
+.table_02, .td_02, .td_02_bold, .th_02 {
+    border: none; 
+    border-collapse: collapse;
+}
+/*---------------------------*/
+.td_02, .td_02_bold, .th_02 {
+    padding: 5px; 
+    vertical-align:top; 
+}
+
+.th_02 {
+    background-color:  rgb(148, 146, 146);
+}
+
+.td_02_bold {
+    font-weight: bold;
+}
+
+.td_02 {
+    width: 450px;
+}
+
+
+
+
+
+
 
 .row_01 {
     display: flex;
@@ -48,10 +130,8 @@ main {
     flex: 1; 
 }
 
-.container_01 {
-    width: 300px; 
-    border: 5px solid darkgray; 
-}
+
+
 /* .flexrow {
     display: flex;
     flex-direction: row;

@@ -9,12 +9,19 @@
 </head>
 <body>
     <header>
-        <div class="header_content_vert"> 
-            <h1>Recipes Dashboard</h1>
-            <h2>Welcome, {{dsp_get_oneUser.firstName}}</h2>
+        <div class="header_content"> 
+            <div class="header_content_vert_left"> 
+                <h1>Recipes</h1>
+                <h2>Your guide to kitchen sanity. </h2>
+            </div>
+            <div class="header_content_vert_right"> 
+                <h2>Welcome, {{dsp_get_oneUser.firstName}}</h2>
+                <h4>(UserID: {{dsp_get_oneUser.id}})</h4>
+                <a href="/logout/">Logout</a>
+            </div>
         </div>
     </header>
-    <div >
+    <div class="messages">
         {% with messages = get_flashed_messages() %}
             {%if messages %}
                 {% for m in messages %}
@@ -24,37 +31,36 @@
         {% endwith %}
     </div>
     <main>
-
-        <table class="table_01" >
-            <tr>
-                <th class="th_01">Recipe Name</th>
-                <th class="th_01">Under 30 mins?</th>
-                <th class="th_01">Actions</th>
-            </tr>
-            {% for rec in dsp_get_allRecipe %}
+        <div class="row_left"> 
+            <h1>Dashboard</h1>  
+            <table class="table_01" >
                 <tr>
-                    <td class="td_01">{{rec.recipeName}}</td>
-                    <td class="td_01">
-                        {%if rec.under30min %}
-                            {{rec.under30min}}
-                        {% else %}
-                        
-                        {% endif %}
-                        
-                    </td>
-                    <td class="td_01">
-                        <a href="/recipe/{{rec.id}}/">View</a>
-                        {%if dsp_get_oneUser.id ==  rec.user_id %}
-                            <a href="/recipe/{{rec.id}}/edit/">Edit</a>
-                            <a href="/recipe/{{rec.id}}/delete/">Delete</a>
-                        {% endif %}
-                    </td>
+                    <th class="th_01">Recipe Name</th>
+                    <th class="th_01">Under 30 mins?</th>
+                    <th class="th_01">Actions</th>
                 </tr>
-            {% endfor %}
-        </table>
-        <div class="">
+                {% for rec in dsp_get_allRecipe %}
+                    <tr>
+                        <td class="td_01">{{rec.recipeName}}</td>
+                        <td class="td_01">
+                            {%if rec.under30min %}
+                                {{rec.under30min}}
+                            {% else %}
+                            
+                            {% endif %}
+                            
+                        </td>
+                        <td class="td_01">
+                            <a href="/recipe/{{rec.id}}/">View</a>
+                            {%if dsp_get_oneUser.id ==  rec.user_id %}
+                                <a href="/recipe/{{rec.id}}/edit/">Edit</a>
+                                <a href="/recipe/{{rec.id}}/delete/">Delete</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
             <button> <a href="/recipe/add/">Add Recipe</a></button>
-            <button> <a href="/logout/">Logout</a></button>
         </div>
     </main>
     
