@@ -9,9 +9,12 @@
 </head>
 <body>
     <header>
-        <h1>Recipes Dashboard<br>Welcome {{dsp_get_oneUser.fullName()}}, aka userid = {{dsp_get_oneUser.id}} </h1>
+        <div class="header_content_vert"> 
+            <h1>Recipes Dashboard</h1>
+            <h2>Welcome, {{dsp_get_oneUser.firstName}}</h2>
+        </div>
     </header>
-    <div class="messages">
+    <div >
         {% with messages = get_flashed_messages() %}
             {%if messages %}
                 {% for m in messages %}
@@ -20,27 +23,26 @@
             {% endif %}
         {% endwith %}
     </div>
-    
     <main>
-        <table>
+
+        <table class="table_01" >
             <tr>
-                <th>Recipe ID</th>
-                <th>Recipe Name</th>
-                <th>Recipe.user_id aka creator</th>
-                <th>Under 30 mins?</th>
-                <th>Description</th>
-                <th>Instructions</th>
-                <th>Actions</th>
+                <th class="th_01">Recipe Name</th>
+                <th class="th_01">Under 30 mins?</th>
+                <th class="th_01">Actions</th>
             </tr>
             {% for rec in dsp_get_allRecipe %}
                 <tr>
-                    <td>{{rec.id}}</td>
-                    <td>{{rec.recipeName}}</td>
-                    <td>{{rec.user_id}} </td>
-                    <td>{{rec.under30min}}</td>
-                    <td>{{rec.recipeDesc}}</td>
-                    <td>{{rec.recipeInst}}</td>
-                    <td class="studentTblData">
+                    <td class="td_01">{{rec.recipeName}}</td>
+                    <td class="td_01">
+                        {%if rec.under30min %}
+                            {{rec.under30min}}
+                        {% else %}
+                        
+                        {% endif %}
+                        
+                    </td>
+                    <td class="td_01">
                         <a href="/recipe/{{rec.id}}/">View</a>
                         {%if dsp_get_oneUser.id ==  rec.user_id %}
                             <a href="/recipe/{{rec.id}}/edit/">Edit</a>
@@ -50,8 +52,10 @@
                 </tr>
             {% endfor %}
         </table>
-        <button> <a href="/recipe/add/">Add Recipe</a></button>
-        <button> <a href="/logout/">Logout</a></button>
+        <div class="">
+            <button> <a href="/recipe/add/">Add Recipe</a></button>
+            <button> <a href="/logout/">Logout</a></button>
+        </div>
     </main>
     
 
@@ -59,6 +63,5 @@
     <footer>
 
     </footer>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
 </body>
 </html>

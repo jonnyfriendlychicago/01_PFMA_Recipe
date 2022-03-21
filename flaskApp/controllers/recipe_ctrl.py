@@ -98,7 +98,7 @@ def updateRecipe(recipe_id):
         , 'recipeDesc': request.form['recipeDesc']
         , 'recipeInst': request.form['recipeInst']
         , 'under30min': request.form['under30min']
-        # , 'recipeInst': request.form['recipeInst']
+        , 'dateMade': request.form['dateMade']
     }
     print(request.form['recipeDesc'])
     updateRecipe = recipe_mod.Recipe_cls.updateRecipe(data)

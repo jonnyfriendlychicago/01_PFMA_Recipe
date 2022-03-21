@@ -38,7 +38,7 @@ class Recipe_cls:
 
     @classmethod
     def updateRecipe (cls, data):
-        q = 'update recipe set recipeName = %(recipeName)s, recipeDesc = %(recipeDesc)s, recipeInst = %(recipeInst)s, under30min = %(under30min)s, updatedAt = NOW() where id = %(recipe_id)s;'
+        q = 'update recipe set recipeName = %(recipeName)s, recipeDesc = %(recipeDesc)s, recipeInst = %(recipeInst)s, under30min = %(under30min)s, dateMade = %(dateMade)s, updatedAt = NOW() where id = %(recipe_id)s;'
         return connectToMySQL(cls.db).query_db(q, data)
 
     @classmethod

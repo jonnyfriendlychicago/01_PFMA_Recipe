@@ -1,57 +1,115 @@
-.multiLine {
-    white-space: pre-line; 
+* {
+    margin: 0; 
+    padding: 0; 
+}
+header {
+    width: 100%; 
+    display: flex; 
+    justify-content: center;
+    background-color: aquamarine;
+    height: 100px; 
+    align-items: center;
 }
 
-.flexrow {
+.header_content_vert {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 3px;
+    border: 1px solid red; 
+}
+
+.table_01, .td_01, .th_01 {
+    border: 1px solid black; 
+    border-collapse: collapse;
+}
+
+.td_01, .th_01 {
+    padding: 5px; 
+}
+
+.th_01 {
+    background-color:  rgb(148, 146, 146);
+}
+
+.row_01 {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex_col_01 {
+    flex: 1; 
+}
+
+.container_01 {
+    width: 300px; 
+    border: 5px solid darkgray; 
+}
+/* .flexrow {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-}
-.flexcolumn {
+} */
+
+/* .flexcolumn {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-table,
+} */
+
+/* table,
 td,
 tr,
 th {
     border: 1px double #cc13cc;
-    padding: 1em;
-}
-table {
-    margin: 2em;
-}
-body {
+    /* padding: 1em; 
+} */
+
+/* table { */
+    /* margin: 2em; */
+/* } */
+
+/* body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+    align-items: center;
+    width: 95%; 
+    width: 100%;
+} */
+
+/* body header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 95%;
+    width: 100%;
+    
+    background-color: aqua; 
 }
-body header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 85%;
-    margin: 1em;
-}
+
 body header nav {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     justify-content: space-evenly;
-    width: 95%;
+    
 }
 body header nav a {
     text-decoration: none;
     color: #000;
-    padding: 1em;
-    border: 3px groove #11c49d;
+    padding: 1em; 
+    border: 3px groove #11c49d; 
     border-radius: 50%;
 }
 body main {
@@ -59,15 +117,15 @@ body main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 85%;
-    margin: 1em;
+    width: 85%; 
+    margin: 1em; 
 }
 body main .row {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 95%;
+
     align-items: flex-start;
 }
 body main .row .column {
@@ -75,8 +133,4 @@ body main .row .column {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 95%;
-}
-body main .row .flights {
-    align-items: flex-start;
-}
+} */

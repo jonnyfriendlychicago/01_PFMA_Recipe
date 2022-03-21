@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>Add a Recipe</title>
 </head>
 <body>
     <header>
-        <h1>Does this recipe need fixing?  Well, do it!</h1>
-        <h2>We trust you, {{dsp_get_oneUser.firstName}}.  You got this.</h2>
+        <div class="header_content_vert"> 
+            <h1>Does this recipe need fixing?  Well... do it!</h1>
+            <h2>We trust you, {{dsp_get_oneUser.firstName}}.  You got this.</h2>
+        </div>
     </header>
+
     <div class="messages">
         {% with messages = get_flashed_messages() %}
             {%if messages %}
@@ -58,8 +62,13 @@
             </section>
 
             <section> 
+                {% if dsp_get_oneRecipe.dateMade %}
+                    <label for="dateMade">dateMade:</label>
+                    <input type="date" id="dateMade" name="dateMade" value = "{{dsp_get_oneRecipe.dateMade.strftime('%Y-%m-%d')}}">
+                {% else %} 
                 <label for="dateMade">dateMade:</label>
-                <input type="date" id="dateMade" name="dateMade" value = "{{dsp_get_oneRecipe.dateMade.strftime('%Y-%m-%d')}}">
+                <input type="date" id="dateMade" name="dateMade" >
+                {% endif %}
             </section>
 
 

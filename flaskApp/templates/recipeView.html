@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>{{dsp_get_oneRecipe.recipeName}}</title>
 </head>
 <body>
     <header>
-        <h1>Here it is, {{dsp_get_oneUser.firstName}}</h1>
-        <h2>{{dsp_get_oneRecipe.recipeName}}, aka recipe ID={{dsp_get_oneRecipe.id}} </h2>
+        <div class="header_content_vert"> 
+            <h1>Here it is, {{dsp_get_oneUser.firstName}}</h1>
+            <h2>{{dsp_get_oneRecipe.recipeName}}, aka recipe ID={{dsp_get_oneRecipe.id}} </h2>
+        </div>
     </header>
     <div class="messages">
         {% with messages = get_flashed_messages() %}
@@ -20,20 +23,25 @@
             {% endif %}
         {% endwith %}
     </div>
+    
     <main>
-        <p class="multiLine">
-            Description: 
-
-            {% set rec_desc = dsp_get_oneRecipe.recipeDesc.split("\r\n") %}
-            {{rec_desc}}
+        <h2>Description: </h2>
+        <p>
+            {% set rec_desc = dsp_get_oneRecipe.recipeDesc.split("\r\n") %} 
             {% for rec in rec_desc: %}
-                
                 {{rec}} <br>
-                
             {% endfor %}
+        </p>
+        <h2>Instructions: </h2>
+        <p>
+            {% set rec_desc = dsp_get_oneRecipe.recipeInst.split("\r\n") %} 
+            {% for rec in rec_desc: %}
+                {{rec}} <br>
+            {% endfor %}
+        </p>
 
-        </h2>
-        <h2>Instructions: {{dsp_get_oneRecipe.recipeInst}}</h2>
+
+
         <h2>under30min: {{dsp_get_oneRecipe.under30min}}</h2>
         <h2>dateMade: 
             {% if dsp_get_oneRecipe.dateMade %}
@@ -41,13 +49,17 @@
             {% else %}
                 No dateMade, buddy!!
             {% endif %}
-        </h2>
-
-
-        <button> <a href="/recipe/{{dsp_get_oneRecipe.id}}/edit/">Edit Recipe</a></button>
+        <p>
+        {%if dsp_get_oneRecipe.user_id ==  dsp_get_oneUser.id %}
+            <button> <a href="/recipe/{{dsp_get_oneRecipe.id}}/edit/">Edit Recipe</a></button>
+            <button> <a href="/recipe/{{dsp_get_oneRecipe.id}}/delete/">Delete Recipe</a></button>
+        {% else %}
+            Only the creator of a recipe can edit or delete the recipe.  Contact user_id {{dsp_get_oneRecipe.user_id}} with suggested edits. 
+        {% endif %}
+        </p>
+                        
         <button> <a href="/logout/">Logout</a></button>
         <button> <a href="/dashboard/">Back to Dashboard</a></button>
-        <button> <a href="/logout/">Logout</a></button>
     </main>
 </body>
 </html>
