@@ -32,7 +32,7 @@ class User_cls:
     def validate(user):
         isValid = True
         q = 'select * from user where email = %(email)s;'
-        result = connectToMySQL(User_cls.db).query_db(q, user)
+        result = connectToMySQL(user.db).query_db(q, user)
         if len(result) >= 1: # somewhat clumsy way (??) of saying, if one or more results!
             isValid = False
             flash("Email already in use.")
